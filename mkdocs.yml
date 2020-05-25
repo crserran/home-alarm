@@ -1,0 +1,12 @@
+theme:
+  name: material
+site_name: Home Alarm
+nav:
+  - Home: index.md
+  - Requirements: requirements.md
+  - Installation: installation.md
+  - Configuration:
+    - Main Configuration: config/index.md
+    - Alexa: config/alexa.md
+    - Google Home & Others: config/others.md
+  - Identification: identification.md

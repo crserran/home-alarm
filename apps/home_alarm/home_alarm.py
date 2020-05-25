@@ -6,7 +6,7 @@ class HomeAlarm(hass.Hass):
   MEDIA_PLAYER_STOP = "media_player/media_stop"
   MEDIA_PLAYER_SET_VOL = "media_player/volume_set"
   MEDIA_PLAYER_CTYPE = "sound"
-  MEDIA_PLAYER_VOLUME = 0.1
+  MEDIA_PLAYER_VOLUME = 1
   ACTIVATION_DELAY = 15
   STOP_DELAY = 180
   NOTIFICATION_TITLE = "ALERT!"
