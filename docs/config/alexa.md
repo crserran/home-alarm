@@ -12,7 +12,6 @@ Get the sound you like most, in my case `<audio src="soundbank://soundlibrary/sc
 After that, get the last part of audio like this: `amzn_sfx_scifi_alarm_03` and assign it to the `sound` attribute in `apps.yaml`
 
 Take a look at the duration of the sound and assign it to the `loop_delay` attribute as: `loop_delay: 5`
-<br/><br/><br/>
-💡 ** TIP **
 
-Alexa puts the request in a queue and I recommend truncate the number of track duration. If track duration is 5.96 secs trunc it to 5.
+!!! tip
+    Alexa puts the request in a queue and I recommend truncate the number of track duration. If track duration is 5.96 secs trunc it to 5.

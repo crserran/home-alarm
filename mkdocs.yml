@@ -10,3 +10,7 @@ nav:
     - Alexa: config/alexa.md
     - Google Home & Others: config/others.md
   - Identification: identification.md
+
+markdown_extensions:
+  - admonition
+  - codehilite

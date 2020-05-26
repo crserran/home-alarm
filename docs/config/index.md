@@ -12,6 +12,7 @@ home_alarm:
     - binary_sensor.entrance_door_contact
   safe_mode: input_boolean.safe_mode
   sound: amzn_sfx_scifi_alarm_04
+  loop_delay: 4
   media_player: media_player.alexa
   notifiers:
     - notify.mobile_app_iphone
@@ -41,9 +42,8 @@ home_alarm:
   alert_msg: "Alarm has been fired"
 ```
 
-💡 ** IMPORTANT NOTE **
-
-`sound` and `loop_delay` are linked variables. If the track specified at `sound` is too short, you will want to repeat it continuously specifying the attribute `loop_delay` as the same as the `sound` track duration.
+!!! info "IMPORTANT NOTE"
+    `sound` and `loop_delay` are linked variables. If the track specified at `sound` is too short, you will want to repeat it continuously specifying the attribute `loop_delay` as the same as the `sound` track duration.
 
 ## Attributes
  Name | Type | Required | Default | Description
