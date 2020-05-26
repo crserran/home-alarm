@@ -381,43 +381,48 @@
                 <h1 id="configuration">Configuration</h1>
 <h2 id="basic">Basic</h2>
 <p>This is a quick example about how to configure the application with Alexa as media player and 2 window/door sensors.</p>
-<pre><code class="yaml">home_alarm:
-  module: home_alarm
-  class: HomeAlarm
-  sensors:
-    - binary_sensor.livingroom_window_contact
-    - binary_sensor.entrance_door_contact
-  safe_mode: input_boolean.safe_mode
-  sound: amzn_sfx_scifi_alarm_04
-  media_player: media_player.alexa
-  notifiers:
-    - notify.mobile_app_iphone
-    - notify.notifier
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nt">home_alarm</span><span class="p">:</span>
+  <span class="nt">module</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">home_alarm</span>
+  <span class="nt">class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HomeAlarm</span>
+  <span class="nt">sensors</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.livingroom_window_contact</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.entrance_door_contact</span>
+  <span class="nt">safe_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">input_boolean.safe_mode</span>
+  <span class="nt">sound</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">amzn_sfx_scifi_alarm_04</span>
+  <span class="nt">loop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+  <span class="nt">media_player</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa</span>
+  <span class="nt">notifiers</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.mobile_app_iphone</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.notifier</span>
+</code></pre></div>
+
 
 <h2 id="advanced">Advanced</h2>
 <p>Example of an advanced configuration. I recommend to take a look <code>Attributes</code> section.</p>
-<pre><code class="yaml">home_alarm:
-  module: home_alarm
-  class: HomeAlarm
-  sensors:
-    - binary_sensor.livingroom_window_contact
-    - binary_sensor.entrance_door_contact
-  safe_mode: input_boolean.safe_mode
-  activation_delay: 10
-  media_player: media_player.alexa
-  sound: amzn_sfx_scifi_alarm_04
-  loop_delay: 4
-  stop_delay: 240
-  notifiers:
-    - notify.mobile_app_iphone
-    - notify.notifier
-  alert_title: &quot;ALARM ALERT!&quot;
-  alert_msg: &quot;Alarm has been fired&quot;
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nt">home_alarm</span><span class="p">:</span>
+  <span class="nt">module</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">home_alarm</span>
+  <span class="nt">class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HomeAlarm</span>
+  <span class="nt">sensors</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.livingroom_window_contact</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.entrance_door_contact</span>
+  <span class="nt">safe_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">input_boolean.safe_mode</span>
+  <span class="nt">activation_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+  <span class="nt">media_player</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa</span>
+  <span class="nt">sound</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">amzn_sfx_scifi_alarm_04</span>
+  <span class="nt">loop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+  <span class="nt">stop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">240</span>
+  <span class="nt">notifiers</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.mobile_app_iphone</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.notifier</span>
+  <span class="nt">alert_title</span><span class="p">:</span> <span class="s">&quot;ALARM</span><span class="nv"> </span><span class="s">ALERT!&quot;</span>
+  <span class="nt">alert_msg</span><span class="p">:</span> <span class="s">&quot;Alarm</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">been</span><span class="nv"> </span><span class="s">fired&quot;</span>
+</code></pre></div>
 
-<p>💡 <strong> IMPORTANT NOTE </strong></p>
+
+<div class="admonition info">
+<p class="admonition-title">IMPORTANT NOTE</p>
 <p><code>sound</code> and <code>loop_delay</code> are linked variables. If the track specified at <code>sound</code> is too short, you will want to repeat it continuously specifying the attribute <code>loop_delay</code> as the same as the <code>sound</code> track duration.</p>
+</div>
 <h2 id="attributes">Attributes</h2>
 <table>
 <thead>
