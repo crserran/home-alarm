@@ -22,6 +22,7 @@ home_alarm:
     - binary_sensor.entrance_door_contact
   safe_mode: input_boolean.safe_mode
   sound: amzn_sfx_scifi_alarm_04
+  loop_delay: 4
   media_player: media_player.alexa
   notifiers:
     - notify.mobile_app_iphone
