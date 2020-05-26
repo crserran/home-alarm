@@ -1,1 +1,1 @@
-👷 WIP, Sorry for the inconveniences.
+:construction_worker_tone3: WIP, Sorry for the inconveniences.

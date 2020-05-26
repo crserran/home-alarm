@@ -1,4 +1,4 @@
-*Home Alarm* allows you to use any media player such as Alexa or Google Home to make them act as an alarm system at home. It also supports the notification system to alert you if you are not at home.
+:bell: *Home Alarm* allows you to use any media player such as Alexa or Google Home to make them act as an alarm system at home. It also supports the notification system to alert you if you are not at home.
 
 
 # Documentation
