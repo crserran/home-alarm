@@ -10,3 +10,12 @@ nav:
     - Alexa: config/alexa.md
     - Google Home & Others: config/others.md
   - Identification: identification.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.emoji:
+      emoji_index: !!python/name:pymdownx.emoji.twemoji
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
