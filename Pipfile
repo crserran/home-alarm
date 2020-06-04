@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+home_alarm = {path = ".", editable = true}
+black = "==19.10b0"
+pre-commit = "*"
+commitizen = "*"
+flake8 = "*"
+mkdocs-material = "*"
+
+
+[packages]
+appdaemon = "==4.0.3"

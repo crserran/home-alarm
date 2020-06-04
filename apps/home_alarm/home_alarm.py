@@ -1,101 +1,73 @@
-import hassapi as hass
-
+import appdaemon.plugins.hass.hassapi as hass
+from typing import List
+from ha_core.state import State
+from ha_core.alert import Alert, AlertList
+from ha_alert import get_alerts
+from ha_alert.log_alert import LogAlert
+from ha_utils.const import Generic
 
 class HomeAlarm(hass.Hass):
-  MEDIA_PLAYER_PLAY = "media_player/play_media"
-  MEDIA_PLAYER_STOP = "media_player/media_stop"
-  MEDIA_PLAYER_SET_VOL = "media_player/volume_set"
-  MEDIA_PLAYER_CTYPE = "sound"
-  MEDIA_PLAYER_VOLUME = 1
-  ACTIVATION_DELAY = 15
-  STOP_DELAY = 180
-  NOTIFICATION_TITLE = "ALERT!"
-  NOTIFICATION_MSG = "Alarm has been fired!"
-  ON = "on"
-  OFF = "off"
 
-  def initialize(self) -> None: 
+  async def initialize(self) -> None: 
     self.log("Welcome to Home Alarm security system.")
+
+    # Home Alarm config parameters
     self.sensors = self.args["sensors"]
     self.safe_mode = self.args["safe_mode"]
-    self.media_player = self.args["media_player"]
-    self.sound = self.args["sound"]
-    self.notifiers = self.get_notifiers(self.args["notifiers"])
-    self.activation_delay = self.args.get("activation_delay", self.ACTIVATION_DELAY)
-    self.loop_delay = self.args.get("loop_delay", None)
-    self.stop_delay = self.args.get("stop_delay", self.STOP_DELAY)
-    self.title = self.args.get("alert_title", self.NOTIFICATION_TITLE)
-    self.alert_msg = self.args.get("alert_msg", self.NOTIFICATION_MSG)
-    self.alarm_is_running = False
-    self.alarm_is_about_to_run = False # Alarm is triggered. Avoid multiple calls to countdown function
-    self.sensor_fired_name = ""
+    self.activation_delay = self.args.get("activation_delay", Generic.ACTIVATION_DELAY)
+    self.stop_delay = self.args.get("stop_delay", Generic.STOP_DELAY)
 
-    self.listen_state(self.disarm_alarm, self.safe_mode, new=self.OFF)
+    # Home Alarm attributes
+    self.state = State()
+    alert_configs = self.args["alerts"]
+    alert_list = self.parse_alerts(alert_configs)
+    self.alerts = AlertList(alert_list)
+    self.sensor_fired = None
+
+    self.listen_state(self.disarm_alarm, self.safe_mode, new=Generic.OFF)
     for sensor in self.sensors:
-      self.listen_state(self.door_opened_cb, sensor, new=self.ON)
+      self.listen_state(self.door_opened_cb, sensor, new=Generic.ON)
 
-  def door_opened_cb(self, sensor, attribute, old, new, kwargs):  
-    self.sensor_fired_name = self.friendly_name(sensor)
-    safe_mode_state = self.get_state(self.safe_mode)
+  async def door_opened_cb(self, sensor, attribute, old, new, kwargs):  
+    self.sensor_fired = sensor
+    safe_mode_state = await self.get_state(self.safe_mode)
     self.log("A door or window has been opened")
-    self.log(f"`alarm_is_about_to_run`: {self.alarm_is_about_to_run}")
-    self.log(f"`alarm_is_running`: {self.alarm_is_running}")
     self.log(f"`safe_mode` state: {safe_mode_state}")
-    if (safe_mode_state == self.ON
-        and not self.alarm_is_about_to_run
-        and not self.alarm_is_running):
-      self.alarm_is_about_to_run = True
+    if (safe_mode_state == Generic.ON
+        and not self.state.ready_to_fire
+        and not self.state.fired):
+      self.state.ready_to_fire = True
       self.run_in(self.countdown, self.activation_delay)
 
-  def countdown(self, kwargs):
-    safe_mode_state = self.get_state(self.safe_mode)
-    if safe_mode_state == self.ON:
-      self.call_service(
-        self.MEDIA_PLAYER_SET_VOL, 
-        entity_id=self.media_player,
-        volume_level=self.MEDIA_PLAYER_VOLUME
-      )
+  async def countdown(self, kwargs):
+    safe_mode_state = await self.get_state(self.safe_mode)
+    if safe_mode_state == Generic.ON:
       self.log("The alarm has been triggered")
-      self.alarm_is_running = True
-      self.fire_alarm()
-      # Notify users
-      for notifier in self.notifiers:
-        self.call_service(
-          notifier, 
-          title=self.title + " [" + self.sensor_fired_name + "]",
-          message="[" + self.sensor_fired_name + "]. " + self.alert_msg
-        )
+      self.state.fired = True
+      # Alarm fired action
+      self.alerts.alarm_fired(self.sensor_fired)
+      # Alarm stop action after stop_delay
       self.run_in(self.stop_alarm, self.stop_delay) 
-    self.alarm_is_about_to_run = False
+    self.state.ready_to_fire = False
 
-  def fire_alarm(self, kwargs=None):
-    if self.alarm_is_running:
-      self.call_service(
-        self.MEDIA_PLAYER_PLAY,
-        entity_id=self.media_player,
-        media_content_id=self.sound,
-        media_content_type=self.MEDIA_PLAYER_CTYPE
-      )
-      if self.loop_delay:
-        self.run_in(self.fire_alarm, self.loop_delay)
-    else:
-      self.log("The alarm has been stopped")
+  async def stop_alarm(self, kwargs=None):
+    self.alerts.alarm_stopped()
+    self.state.fired = False
+    self.state.stopped = True
 
-  def stop_alarm(self, kwargs=None):
-    self.stop_media_service()
-
-  def disarm_alarm(self, safe_mode, attribute, old, new, kwargs=None):
-    if self.alarm_is_running:
+  async def disarm_alarm(self, safe_mode, attribute, old, new, kwargs=None):
+    if self.state.fired:
       self.log("Alarm has been disarmed")
-      self.stop_media_service()
+      self.stop_alarm()
 
-  def stop_media_service(self):
-    self.log("Stopping media service...")
-    self.call_service(
-      self.MEDIA_PLAYER_STOP,
-      entity_id=self.media_player
-    )
-    self.alarm_is_running = False
-
-  def get_notifiers(self, notifiers):
-    return [n.replace('.', '/') for n in notifiers]
+  def parse_alerts(self, alert_configs: List[dict]) -> List[Alert]:
+    """
+    Required:
+      - id
+    """
+    alerts = []
+    alerts_dict = get_alerts()
+    for alert_config in alert_configs:
+      alert_cls = alerts_dict.get(alert_config["id"])
+      alerts.append(alert_cls(self.state, self, alert_config))
+    return alerts
