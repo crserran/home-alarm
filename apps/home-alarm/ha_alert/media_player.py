@@ -1,6 +1,6 @@
 from ha_core.alert import Alert
 from ha_core.state import State
-from ha_utils.const import Generic, MediaPlayer
+from ha_utils.ha_const import Generic, MediaPlayer
 
 class MediaPlayerAlert(Alert):
   alert_id = "media_player"

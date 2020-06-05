@@ -3,7 +3,7 @@ from typing import List
 from ha_core.state import State
 from ha_core.alert import Alert, AlertList
 from ha_alert import get_alerts
-from ha_utils.const import Generic
+from ha_utils.ha_const import Generic
 
 class HomeAlarm(hass.Hass):
 

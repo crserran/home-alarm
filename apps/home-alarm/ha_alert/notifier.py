@@ -1,7 +1,7 @@
 import appdaemon.plugins.hass.hassapi as hass
 from ha_core.alert import Alert
 from ha_core.state import State
-from ha_utils.const import Generic, Notifier
+from ha_utils.ha_const import Generic, Notifier
 
 class NotifierAlert(Alert):
   alert_id = "notifier"
