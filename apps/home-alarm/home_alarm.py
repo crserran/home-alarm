@@ -35,29 +35,27 @@ class HomeAlarm(hass.Hass):
     if (safe_mode_state == Generic.ON
         and not self.state.ready_to_fire
         and not self.state.fired):
-      self.state.ready_to_fire = True
+      self.state.set_ready_to_fire()
       self.run_in(self.countdown, self.activation_delay)
 
   async def countdown(self, kwargs):
     safe_mode_state = await self.get_state(self.safe_mode)
     if safe_mode_state == Generic.ON:
       self.log("The alarm has been triggered")
-      self.state.fired = True
+      self.state.set_fired()
       # Alarm fired action
       self.alerts.alarm_fired(self.sensor_fired)
       # Alarm stop action after stop_delay
       self.run_in(self.stop_alarm, self.stop_delay) 
-    self.state.ready_to_fire = False
 
   async def stop_alarm(self, kwargs=None):
+    self.state.set_stopped()
     self.alerts.alarm_stopped()
-    self.state.fired = False
-    self.state.stopped = True
 
   async def disarm_alarm(self, safe_mode, attribute, old, new, kwargs=None):
     if self.state.fired:
       self.log("Alarm has been disarmed")
-      self.stop_alarm()
+      await self.stop_alarm()
 
   def parse_alerts(self, alert_configs: List[dict]) -> List[Alert]:
     """
