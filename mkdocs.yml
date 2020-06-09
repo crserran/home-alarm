@@ -9,6 +9,9 @@ nav:
     - Main Configuration: config/index.md
     - Alexa: config/alexa.md
     - Google Home & Others: config/others.md
+  - Alerts:
+    - Media Player: alerts/media_player.md
+    - Notifier: alerts/notifier.md
   - Identification: identification.md
 
 markdown_extensions:
