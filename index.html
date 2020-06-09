@@ -260,6 +260,60 @@
       
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Alerts
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Alerts" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Alerts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="alerts/media_player/" title="Media Player" class="md-nav__link">
+      Media Player
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="alerts/notifier/" title="Notifier" class="md-nav__link">
+      Notifier
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
   <li class="md-nav__item">
     <a href="identification/" title="Identification" class="md-nav__link">
       Identification
@@ -304,20 +358,26 @@
 <p>If the safe mode is active and some of windows or doors are opened, the user has a few seconds to indentify himself into the system. (<a href="identification/">see link</a>)</p>
 <p>If the user cannot identify himself into the system, the alarm will be fired on the media player and the user will be notified that an unathorized user has been entered to his house.</p>
 <h1 id="example">Example</h1>
-<p>This is a quick example about how to configure the application with Alexa as media player and 2 window/door sensors.</p>
+<p>This is a quick example about how to configure the application with 2 Alexas as media players, 2 window/door sensors and 1 motion sensor.</p>
 <div class="codehilite"><pre><span></span><code><span class="nt">home_alarm</span><span class="p">:</span>
   <span class="nt">module</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">home_alarm</span>
   <span class="nt">class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HomeAlarm</span>
   <span class="nt">sensors</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.livingroom_window_contact</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.entrance_door_contact</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.entrance_motion_occupancy</span>
   <span class="nt">safe_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">input_boolean.safe_mode</span>
-  <span class="nt">sound</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">amzn_sfx_scifi_alarm_04</span>
-  <span class="nt">loop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
-  <span class="nt">media_player</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa</span>
-  <span class="nt">notifiers</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.mobile_app_iphone</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.notifier</span>
+  <span class="nt">alerts</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">media_player</span>
+      <span class="nt">sound</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">amzn_sfx_scifi_alarm_04</span>
+      <span class="nt">loop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+      <span class="nt">media_players</span><span class="p">:</span> 
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa2</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">notifier</span>
+      <span class="nt">notifiers</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.mobile_app_iphone</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.notifier</span>
 </code></pre></div>
                 
               

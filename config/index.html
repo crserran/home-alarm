@@ -266,6 +266,26 @@
     Attributes
   </a>
   
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic" class="md-nav__link">
+    Generic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alerts" class="md-nav__link">
+    Alerts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -295,6 +315,60 @@
   <li class="md-nav__item">
     <a href="others/" title="Google Home & Others" class="md-nav__link">
       Google Home & Others
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Alerts
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Alerts" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Alerts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../alerts/media_player/" title="Media Player" class="md-nav__link">
+      Media Player
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../alerts/notifier/" title="Notifier" class="md-nav__link">
+      Notifier
     </a>
   </li>
 
@@ -360,6 +434,26 @@
     Attributes
   </a>
   
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic" class="md-nav__link">
+    Generic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alerts" class="md-nav__link">
+    Alerts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -380,20 +474,26 @@
                 
                 <h1 id="configuration">Configuration</h1>
 <h2 id="basic">Basic</h2>
-<p>This is a quick example about how to configure the application with Alexa as media player and 2 window/door sensors.</p>
+<p>This is a quick example about how to configure the application with 2 Alexas as media players, 2 window/door sensors and 1 motion sensor.</p>
 <div class="codehilite"><pre><span></span><code><span class="nt">home_alarm</span><span class="p">:</span>
   <span class="nt">module</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">home_alarm</span>
   <span class="nt">class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HomeAlarm</span>
   <span class="nt">sensors</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.livingroom_window_contact</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.entrance_door_contact</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.entrance_motion_occupancy</span>
   <span class="nt">safe_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">input_boolean.safe_mode</span>
-  <span class="nt">sound</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">amzn_sfx_scifi_alarm_04</span>
-  <span class="nt">loop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
-  <span class="nt">media_player</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa</span>
-  <span class="nt">notifiers</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.mobile_app_iphone</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.notifier</span>
+  <span class="nt">alerts</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">media_player</span>
+      <span class="nt">sound</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">amzn_sfx_scifi_alarm_04</span>
+      <span class="nt">loop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+      <span class="nt">media_players</span><span class="p">:</span> 
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa2</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">notifier</span>
+      <span class="nt">notifiers</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.mobile_app_iphone</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.notifier</span>
 </code></pre></div>
 
 
@@ -405,17 +505,24 @@
   <span class="nt">sensors</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.livingroom_window_contact</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.entrance_door_contact</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">binary_sensor.entrance_motion_occupancy</span>
   <span class="nt">safe_mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">input_boolean.safe_mode</span>
   <span class="nt">activation_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
-  <span class="nt">media_player</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa</span>
-  <span class="nt">sound</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">amzn_sfx_scifi_alarm_04</span>
-  <span class="nt">loop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
   <span class="nt">stop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">240</span>
-  <span class="nt">notifiers</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.mobile_app_iphone</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.notifier</span>
-  <span class="nt">alert_title</span><span class="p">:</span> <span class="s">&quot;ALARM</span><span class="nv"> </span><span class="s">ALERT!&quot;</span>
-  <span class="nt">alert_msg</span><span class="p">:</span> <span class="s">&quot;Alarm</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">been</span><span class="nv"> </span><span class="s">fired&quot;</span>
+  <span class="nt">alerts</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">media_player</span>
+      <span class="nt">sound</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">amzn_sfx_scifi_alarm_04</span>
+      <span class="nt">loop_delay</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+      <span class="nt">volume</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.8</span>
+      <span class="nt">media_players</span><span class="p">:</span> 
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">media_player.alexa2</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">notifier</span>
+      <span class="nt">notifiers</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.mobile_app_iphone</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notify.notifier</span>
+      <span class="nt">title</span><span class="p">:</span> <span class="s">&quot;ALARM</span><span class="nv"> </span><span class="s">ALERT!</span><span class="nv"> </span><span class="s">{sensor}&quot;</span>
+      <span class="nt">message</span><span class="p">:</span> <span class="s">&quot;Alarm</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">been</span><span class="nv"> </span><span class="s">fired</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">{sensor}</span><span class="nv"> </span><span class="s">sensor&quot;</span>
 </code></pre></div>
 
 
@@ -424,6 +531,7 @@
 <p><code>sound</code> and <code>loop_delay</code> are linked variables. If the track specified at <code>sound</code> is too short, you will want to repeat it continuously specifying the attribute <code>loop_delay</code> as the same as the <code>sound</code> track duration.</p>
 </div>
 <h2 id="attributes">Attributes</h2>
+<h3 id="generic">Generic</h3>
 <table>
 <thead>
 <tr>
@@ -450,25 +558,11 @@
 <td align="center">Safe mode input boolean. If <code>true</code> protected mode enabled, otherwise <code>false</code> protected mode disabled.</td>
 </tr>
 <tr>
-<td align="center">media_player</td>
-<td align="center">string</td>
-<td align="center">yes</td>
-<td align="center"></td>
-<td align="center">Media player device to reproduce the alarm sound.</td>
-</tr>
-<tr>
-<td align="center">sound</td>
-<td align="center">string</td>
-<td align="center">yes</td>
-<td align="center"></td>
-<td align="center">If Alexa name of sound from <a href="https://developer.amazon.com/es-ES/docs/alexa/custom-skills/ask-soundlibrary.html#available-sounds">here</a>, otherwise other media players specify the full path of the mp3 track.</td>
-</tr>
-<tr>
-<td align="center">loop_delay</td>
+<td align="center">activation_delay</td>
 <td align="center">int</td>
 <td align="center">no</td>
-<td align="center">None</td>
-<td align="center">Time to reproduce again <code>sound</code> attribute. If <code>sound</code> duration is 4secs, <code>loop_delay</code> has to be 4.</td>
+<td align="center">15</td>
+<td align="center">Time that user has to be identified in the system. If user is not identified, alarm will be fired.</td>
 </tr>
 <tr>
 <td align="center">stop_delay</td>
@@ -478,35 +572,19 @@
 <td align="center">Time to stop alarm after been fired.</td>
 </tr>
 <tr>
-<td align="center">activation_delay</td>
-<td align="center">int</td>
-<td align="center">no</td>
-<td align="center">15</td>
-<td align="center">Time that user has to be identified in the system. If user is not identified, alarm will be fired.</td>
-</tr>
-<tr>
-<td align="center">notifiers</td>
+<td align="center">alerts</td>
 <td align="center">array</td>
 <td align="center">yes</td>
 <td align="center">[]</td>
-<td align="center">List of notifiers to inform the incident detected.</td>
-</tr>
-<tr>
-<td align="center">alert_title</td>
-<td align="center">string</td>
-<td align="center">no</td>
-<td align="center">"ALERT!"</td>
-<td align="center">Customize the title of the notification</td>
-</tr>
-<tr>
-<td align="center">alert_msg</td>
-<td align="center">string</td>
-<td align="center">no</td>
-<td align="center">"Alarm has been fired!"</td>
-<td align="center">Customize the message of the notification</td>
+<td align="center">List of alerts (view supported alerts on the alerts section)</td>
 </tr>
 </tbody>
 </table>
+<h3 id="alerts">Alerts</h3>
+<ul>
+<li><a href="../alerts/media_player/">Media Player Alerts</a></li>
+<li><a href="../alerts/notifier/">Notifier Alerts</a></li>
+</ul>
                 
               
               
