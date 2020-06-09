@@ -10,35 +10,53 @@ class MediaPlayerAlert(Alert):
     self.sound = kwargs["sound"]
     self.volume = kwargs.get("volume", MediaPlayer.MEDIA_PLAYER_VOLUME)
     self.loop_delay = kwargs.get("loop_delay", None)
+    # Initial state of media players
+    self.init_state = dict()
 
   async def alarm_fired(self, sensor_fired) -> None:
-    for media_player in self.media_players:
-      await self.hass.call_service(
-        MediaPlayer.MEDIA_PLAYER_SET_VOL, 
-        entity_id=media_player,
-        volume_level=self.volume
-      )
-      kwargs = { "media_player": media_player }
-      await self.play_sound(kwargs)
+    self.init_state = await self.get_init_state()
+    self.hass.log(f"init_state {self.init_state}")
+    await self.hass.call_service(
+      MediaPlayer.MEDIA_PLAYER_SET_VOL, 
+      entity_id=self.media_players,
+      volume_level=self.volume
+    )
+    await self.play_sound()
 
-  async def play_sound(self, kwargs):
-    media_player = kwargs["media_player"]
+  async def play_sound(self, kwargs=None):
     if self.state.fired:
       await self.hass.call_service(
         MediaPlayer.MEDIA_PLAYER_PLAY,
-        entity_id=media_player,
+        entity_id=self.media_players,
         media_content_id=self.sound,
         media_content_type=MediaPlayer.MEDIA_PLAYER_CTYPE
       )
       if self.loop_delay:
-        await self.hass.run_in(self.play_sound, self.loop_delay, media_player = media_player)
+        await self.hass.run_in(self.play_sound, self.loop_delay)
     else:
-      self.hass.log(f"Alarm from {media_player} has been stopped")
+      self.hass.log(f"Alarm has been stopped")
 
   async def alarm_stopped(self) -> None:
     self.hass.log("Stopping media services...")
+    await self.hass.call_service(
+      MediaPlayer.MEDIA_PLAYER_STOP,
+      entity_id=self.media_players
+    )
+    await self.set_init_state()
+
+  async def get_init_state(self) -> dict:
+    state = dict()
+    for media_player in self.media_players:
+      state[media_player] = await self.hass.get_state( 
+        media_player, 
+        MediaPlayer.MEDIA_PLAYER_VOLUME_LEVEL
+      )
+    return state;
+
+  async def set_init_state(self):
     for media_player in self.media_players:
       await self.hass.call_service(
-        MediaPlayer.MEDIA_PLAYER_STOP,
-        entity_id=media_player
+        MediaPlayer.MEDIA_PLAYER_SET_VOL, 
+        entity_id=media_player,
+        volume_level=self.init_state[media_player]
       )

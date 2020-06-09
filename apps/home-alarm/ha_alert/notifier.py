@@ -19,6 +19,6 @@ class NotifierAlert(Alert):
     for notifier in self.notifiers:
       self.hass.call_service(
         notifier,
-        title=self.title + " [" + sensor_fired_name + "]",
-        message="[" + sensor_fired_name + "]. " + self.message
+        title=self.title.format(sensor=sensor_fired_name),
+        message=self.message.format(sensor=sensor_fired_name)
       )

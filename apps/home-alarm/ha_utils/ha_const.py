@@ -10,7 +10,8 @@ class MediaPlayer:
   MEDIA_PLAYER_SET_VOL = "media_player/volume_set"
   MEDIA_PLAYER_CTYPE = "sound"
   MEDIA_PLAYER_VOLUME = 1
+  MEDIA_PLAYER_VOLUME_LEVEL = "volume_level"
 
 class Notifier:
-  NOTIFICATION_TITLE = "ALERT!"
-  NOTIFICATION_MSG = "Alarm has been fired!"
+  NOTIFICATION_TITLE = "ALERT! [{sensor}]"
+  NOTIFICATION_MSG = "[{sensor}] Alarm has been fired!"
