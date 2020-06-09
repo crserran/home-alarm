@@ -25,7 +25,6 @@ class HomeAlarm(hass.Hass):
     self.sensor_fired = None
     # Identifier of stop alarm run_in function
     self.handle_stop_alarm = None
-    self.reset = False
 
     self.listen_state(self.disarm_alarm, self.safe_mode, new=Generic.OFF)
     for sensor in self.sensors:
