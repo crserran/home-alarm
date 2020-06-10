@@ -20,7 +20,7 @@ You can check the full documentation [here](https://crserran.github.io/home-alar
 
 # Example
 
-This is a quick example about how to configure the application with Alexa as media player and 2 window/door sensors.
+This is a quick example about how to configure the application with 2 Alexas as media players, 2 window/door sensors and 1 motion sensor.
 
 ```yaml
 home_alarm:
@@ -29,13 +29,19 @@ home_alarm:
   sensors:
     - binary_sensor.livingroom_window_contact
     - binary_sensor.entrance_door_contact
+    - binary_sensor.entrance_motion_occupancy
   safe_mode: input_boolean.safe_mode
-  sound: amzn_sfx_scifi_alarm_04
-  loop_delay: 4
-  media_player: media_player.alexa
-  notifiers:
-    - notify.mobile_app_iphone
-    - notify.notifier
+  alerts:
+    - id: media_player
+      sound: amzn_sfx_scifi_alarm_04
+      loop_delay: 4
+      media_players: 
+        - media_player.alexa
+        - media_player.alexa2
+    - id: notifier
+      notifiers:
+        - notify.mobile_app_iphone
+        - notify.notifier
 ```
 # Requirements
 For run successfully this application you have to take into account the following:
