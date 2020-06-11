@@ -3,6 +3,9 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/crserran/home-alarm?style=for-the-badge) 
 ![GitHub Release Date](https://img.shields.io/github/release-date/crserran/home-alarm?style=for-the-badge) 
 
+[![community-topic](https://img.shields.io/badge/community-topic-blue?style=for-the-badge)](https://community.home-assistant.io/t/home-alarm-build-your-own-security-system-at-home/203784)
+
+
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
 [![buy-me-a-beer](https://img.shields.io/badge/sponsor-Buy%20me%20a%20beer-orange?style=for-the-badge)](https://www.buymeacoffee.com/crserran)
 

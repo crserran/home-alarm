@@ -12,5 +12,9 @@ To install *Home Alarm* easily I recommend to install it by HACS. You need to en
 
 To install *Home Alarm* manually you have to download the `home_alarm` directory inside `apps` folder, copy it to your `/config/appdeamon/apps` directory in HA and rename it to `home-alarm`. You must restart AppDeamon.
 
+# Updates
+
+When updating the app is important to restart AppDeamon integration from Supervisor.
+
 # What's next?
 :arrow_right: [configuration](config/index.md)
