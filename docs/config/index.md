@@ -37,6 +37,7 @@ home_alarm:
     - binary_sensor.entrance_door_contact
     - binary_sensor.entrance_motion_occupancy
   safe_mode: input_boolean.safe_mode
+  safe_mode_delay: 90
   activation_delay: 10
   stop_delay: 240
   alerts:
@@ -64,6 +65,7 @@ home_alarm:
 :----:|:----:|:--------:|:-------:|:-----------:
 sensors | array | yes | [] | Windows and doors binary sensors.
 safe_mode | string | yes |  | Safe mode input boolean. If `true` protected mode enabled, otherwise `false` protected mode disabled.
+safe_mode_delay | int | no | 60 | Time the user has to leave the house after safe_mode sensor is changed to `ON` state.
 activation_delay | int | no | 15 | Time that user has to be identified in the system. If user is not identified, alarm will be fired.
 stop_delay | int | no | 180 | Time to stop alarm after been fired.
 alerts | array | yes | [] | List of alerts (view supported alerts on the alerts section)
