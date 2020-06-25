@@ -31,12 +31,12 @@ class HomeAlarm(hass.Hass):
       self.listen_state(self.door_opened_cb, sensor, new=Generic.ON)
 
   async def door_opened_cb(self, sensor, attribute, old, new, kwargs):
-    await self.reset_stop_alarm()
     self.sensor_fired = sensor
     sensor_fired_name = await self.friendly_name(self.sensor_fired)
     safe_mode_state = await self.get_state(self.safe_mode)
     self.log(f"{sensor_fired_name} activated")
     self.log(f"`safe_mode` state: {safe_mode_state}")
+    await self.reset_stop_alarm()
     if (safe_mode_state == Generic.ON
         and not self.state.ready_to_fire
         and not self.state.fired):
@@ -56,6 +56,7 @@ class HomeAlarm(hass.Hass):
   async def stop_alarm(self, kwargs=None):
     self.state.set_stopped()
     self.alerts.alarm_stopped()
+    await self.cancel_timer(self.handle_stop_alarm)
 
   async def disarm_alarm(self, safe_mode, attribute, old, new, kwargs=None):
     if self.state.fired:
