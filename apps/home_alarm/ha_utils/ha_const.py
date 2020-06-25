@@ -1,6 +1,7 @@
 class Generic:
   ON = "on"
   OFF = "off"
+  SAFE_MODE_DELAY = 60
   ACTIVATION_DELAY = 15
   STOP_DELAY = 180
 
