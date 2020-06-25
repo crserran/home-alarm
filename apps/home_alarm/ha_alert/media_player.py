@@ -15,7 +15,6 @@ class MediaPlayerAlert(Alert):
 
   async def alarm_fired(self, sensor_fired) -> None:
     self.init_state = await self.get_init_state()
-    self.hass.log(f"init_state {self.init_state}")
     await self.hass.call_service(
       MediaPlayer.MEDIA_PLAYER_SET_VOL, 
       entity_id=self.media_players,
