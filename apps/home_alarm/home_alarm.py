@@ -13,6 +13,7 @@ class HomeAlarm(hass.Hass):
     # Home Alarm config parameters
     self.sensors = self.args["sensors"]
     self.safe_mode = self.args["safe_mode"]
+    self.safe_mode_delay = self.args.get("safe_mode_delay", Generic.SAFE_MODE_DELAY)
     self.activation_delay = self.args.get("activation_delay", Generic.ACTIVATION_DELAY)
     self.stop_delay = self.args.get("stop_delay", Generic.STOP_DELAY)
 
@@ -21,14 +22,23 @@ class HomeAlarm(hass.Hass):
     alert_configs = self.args["alerts"]
     alert_list = self.parse_alerts(alert_configs)
     self.alerts = AlertList(alert_list)
-    # Sensor that fire alarm
+    # Safe Mode initialization
+    self.safe_mode_active = True if (await self.get_state(self.safe_mode) == Generic.ON) else False
+    # Sensor that fires alarm
     self.sensor_fired = None
-    # Identifier of stop alarm run_in function
+    # Handler functions
     self.handle_stop_alarm = None
+    self.handle_activate_safe_mode = None
 
-    self.listen_state(self.disarm_alarm, self.safe_mode, new=Generic.OFF)
+    self.listen_state(self.safe_mode_cb, self.safe_mode)
     for sensor in self.sensors:
       self.listen_state(self.door_opened_cb, sensor, new=Generic.ON)
+  
+  async def safe_mode_cb(self, sensor, attribute, old, new, kwargs):
+    if (new == Generic.ON):
+      self.handle_activate_safe_mode = await self.run_in(self.activate_safe_mode, self.safe_mode_delay)
+    elif (new == Generic.OFF):
+      await self.run_in(self.disarm_alarm, 0)
 
   async def door_opened_cb(self, sensor, attribute, old, new, kwargs):
     self.sensor_fired = sensor
@@ -36,10 +46,12 @@ class HomeAlarm(hass.Hass):
     safe_mode_state = await self.get_state(self.safe_mode)
     self.log(f"{sensor_fired_name} activated")
     self.log(f"`safe_mode` state: {safe_mode_state}")
+    self.log(f"`safe_mode_active` state: {self.safe_mode_active}")
     await self.reset_stop_alarm()
     if (safe_mode_state == Generic.ON
         and not self.state.ready_to_fire
-        and not self.state.fired):
+        and not self.state.fired
+        and self.safe_mode_active):
       self.state.set_ready_to_fire()
       self.run_in(self.countdown, self.activation_delay)
 
@@ -58,16 +70,23 @@ class HomeAlarm(hass.Hass):
     self.alerts.alarm_stopped()
     await self.cancel_timer(self.handle_stop_alarm)
 
-  async def disarm_alarm(self, safe_mode, attribute, old, new, kwargs=None):
+  async def disarm_alarm(self, kwargs=None):
     if self.state.fired:
       self.log("Alarm has been disarmed")
       await self.stop_alarm()
+
+    self.safe_mode_active = False
+    await self.cancel_timer(self.handle_activate_safe_mode)
 
   async def reset_stop_alarm(self):
     if self.state.fired:
       self.log("Reset stop alarm timer")
       await self.cancel_timer(self.handle_stop_alarm)
       self.handle_stop_alarm = await self.run_in(self.stop_alarm, self.stop_delay) 
+
+  async def activate_safe_mode(self, kwargs):
+    self.log("Safe mode activated")
+    self.safe_mode_active = True
 
   def parse_alerts(self, alert_configs: List[dict]) -> List[Alert]:
     """
