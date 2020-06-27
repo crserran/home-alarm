@@ -16,3 +16,9 @@ class MediaPlayer:
 class Notifier:
   NOTIFICATION_TITLE = "ALERT! [{sensor}]"
   NOTIFICATION_MSG = "[{sensor}] Alarm has been fired!"
+
+class XiaomiGateway:
+  XIAOMI_PLAY = "xiaomi_aqara/play_ringtone"
+  XIAOMI_STOP = "xiaomi_aqara/stop_ringtone"
+  XIAOMI_VOLUME = 100
+  XIAOMI_LOOP_DELAY = 7
