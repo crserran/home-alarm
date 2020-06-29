@@ -22,3 +22,8 @@ class XiaomiGateway:
   XIAOMI_STOP = "xiaomi_aqara/stop_ringtone"
   XIAOMI_VOLUME = 100
   XIAOMI_LOOP_DELAY = 7
+
+class Light:
+  LIGHT_TOGGLE = "light/toggle"
+  LIGHT_TURN_ON = "light/turn_on"
+  LIGHT_TURN_OFF = "light/turn_off"

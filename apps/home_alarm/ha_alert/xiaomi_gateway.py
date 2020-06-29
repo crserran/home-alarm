@@ -9,7 +9,6 @@ class XiaomiGatewayAlert(Alert):
     self.gateways = kwargs["gw_mac"]
     self.ringtone = kwargs["ringtone_id"]
     self.volume = kwargs.get("ringtone_vol", XiaomiGateway.XIAOMI_VOLUME)
-    self.loop_delay = XiaomiGateway.XIAOMI_LOOP_DELAY
 
   async def alarm_fired(self, sensor_fired) -> None:
     for gateway in self.gateways:
@@ -24,10 +23,9 @@ class XiaomiGatewayAlert(Alert):
         ringtone_id=self.ringtone,
         ringtone_vol=self.volume
       )
-      if self.loop_delay:
-        await self.hass.run_in(self.play_sound, self.loop_delay, gateway = gateway)
+      await self.hass.run_in(self.play_sound, XiaomiGateway.XIAOMI_LOOP_DELAY, gateway = gateway)
     else:
-      self.hass.log(f"Alarm has been stopped")
+      self.hass.log(f"Alarm from {gateway} has been stopped")
 
   async def alarm_stopped(self) -> None:
     self.hass.log("Stopping xiaomi gateways...")
