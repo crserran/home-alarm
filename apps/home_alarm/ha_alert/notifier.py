@@ -8,8 +8,8 @@ class NotifierAlert(Alert):
 
   def parse_kwargs(self, kwargs) -> None:
     self.notifiers = self.get_notifiers(kwargs["notifiers"])
-    self.title = kwargs.get("title", Notifier.NOTIFICATION_TITLE)
-    self.message = kwargs.get("message", Notifier.NOTIFICATION_MSG)
+    self.title = kwargs.get("title", Notifier.TITLE)
+    self.message = kwargs.get("message", Notifier.MSG)
 
   def get_notifiers(self, notifiers):
     return [n.replace('.', '/') for n in notifiers]

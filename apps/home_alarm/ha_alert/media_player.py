@@ -8,7 +8,7 @@ class MediaPlayerAlert(Alert):
   def parse_kwargs(self, kwargs) -> None:
     self.media_players = kwargs["media_players"]
     self.sound = kwargs["sound"]
-    self.volume = kwargs.get("volume", MediaPlayer.MEDIA_PLAYER_VOLUME)
+    self.volume = kwargs.get("volume", MediaPlayer.VOLUME)
     self.loop_delay = kwargs.get("loop_delay", None)
     # Initial state of media players
     self.init_state = dict()
@@ -16,7 +16,7 @@ class MediaPlayerAlert(Alert):
   async def alarm_fired(self, sensor_fired) -> None:
     self.init_state = await self.get_init_state()
     await self.hass.call_service(
-      MediaPlayer.MEDIA_PLAYER_SET_VOL, 
+      MediaPlayer.SET_VOL, 
       entity_id=self.media_players,
       volume_level=self.volume
     )
@@ -25,10 +25,10 @@ class MediaPlayerAlert(Alert):
   async def play_sound(self, kwargs=None):
     if self.state.fired:
       await self.hass.call_service(
-        MediaPlayer.MEDIA_PLAYER_PLAY,
+        MediaPlayer.PLAY,
         entity_id=self.media_players,
         media_content_id=self.sound,
-        media_content_type=MediaPlayer.MEDIA_PLAYER_CTYPE
+        media_content_type=MediaPlayer.CTYPE
       )
       if self.loop_delay:
         await self.hass.run_in(self.play_sound, self.loop_delay)
@@ -38,7 +38,7 @@ class MediaPlayerAlert(Alert):
   async def alarm_stopped(self) -> None:
     self.hass.log("Stopping media services...")
     await self.hass.call_service(
-      MediaPlayer.MEDIA_PLAYER_STOP,
+      MediaPlayer.STOP,
       entity_id=self.media_players
     )
     await self.set_init_state()
@@ -48,14 +48,14 @@ class MediaPlayerAlert(Alert):
     for media_player in self.media_players:
       state[media_player] = await self.hass.get_state( 
         media_player, 
-        MediaPlayer.MEDIA_PLAYER_VOLUME_LEVEL
+        MediaPlayer.VOLUME_LEVEL
       )
     return state;
 
   async def set_init_state(self):
     for media_player in self.media_players:
       await self.hass.call_service(
-        MediaPlayer.MEDIA_PLAYER_SET_VOL, 
+        MediaPlayer.SET_VOL, 
         entity_id=media_player,
         volume_level=self.init_state[media_player]
       )

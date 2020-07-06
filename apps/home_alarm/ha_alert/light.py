@@ -7,6 +7,8 @@ class LightAlert(Alert):
 
   def parse_kwargs(self, kwargs) -> None:
     self.lights = kwargs["lights"]
+    self.rgb_color = kwargs.get("rgb_color", Light.COLOR)
+    self.brightness = kwargs.get("brightness", Light.BRIGHTNESS)
 
   async def alarm_fired(self, sensor_fired) -> None:
     for light in self.lights:
@@ -16,10 +18,10 @@ class LightAlert(Alert):
     light = kwargs["light"]
     if self.state.fired:
       await self.hass.call_service(
-        Light.LIGHT_TOGGLE,
+        Light.TOGGLE,
         entity_id=light,
-        color_name="red",
-        brightness=255
+        rgb_color=self.rgb_color,
+        brightness=self.brightness
       )
       await self.hass.run_in(self.toggle_light, 1, light = light)
     else:
@@ -29,6 +31,6 @@ class LightAlert(Alert):
     self.hass.log("Stopping lights...")
     for light in self.lights:
       await self.hass.call_service(
-        Light.LIGHT_TURN_OFF,
+        Light.TURN_OFF,
         entity_id=light
       )
