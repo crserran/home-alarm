@@ -14,7 +14,7 @@ pytest = "*"
 pytest-cov = "*"
 pytest-mock= "*"
 pytest-asyncio = "*"
-pyyaml = "5.1.2"
+pyyaml = "*"
 
 [packages]
 appdaemon = "==4.0.3"

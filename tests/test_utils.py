@@ -16,7 +16,6 @@ async def fake_run_in(method, delay):
 
 
 def read_config(file_name):
-    print(yaml.__version__)
     with open(f"tests/assets/{file_name}.yaml") as f:
         data = yaml.load(f, Loader=yaml.CLoader)
     return list(data.values())[0]
