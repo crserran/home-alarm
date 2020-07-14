@@ -1,0 +1,33 @@
+trigger:
+  - master
+  - dev
+  - refs/tags/*
+  
+  pr:
+  - master
+  - dev
+  
+  pool:
+    vmImage: 'ubuntu-latest'
+  
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.7' 
+    displayName: 'Install Python 3.7'
+- script: pip install pipenv
+  displayName: 'Install pipenv'
+- script: python -m pipenv install --dev
+  displayName: 'Install dependencies'
+- script: pipenv run black apps/home_alarm tests --check
+  displayName: Formatter (black)
+- script: pipenv run pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=apps --cov-report=xml --cov-report=html
+  displayName: 'Tests (pytest)'
+- task: PublishCodeCoverageResults@1
+  displayName: Publish code coverage
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+- script: pipenv run mkdocs gh-deploy
+  condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
+  displayName: Deploy docs
