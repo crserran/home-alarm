@@ -3,12 +3,12 @@ trigger:
   - dev
   - refs/tags/*
   
-  pr:
+pr:
   - master
   - dev
   
-  pool:
-    vmImage: 'ubuntu-latest'
+pool:
+  vmImage: 'ubuntu-latest'
   
 steps:
 - task: UsePythonVersion@0
