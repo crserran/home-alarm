@@ -1,0 +1,34 @@
+home_alarm:
+  module: home_alarm
+  class: HomeAlarm
+  sensors:
+    - binary_sensor.livingroom_window_contact
+    - binary_sensor.entrance_door_contact
+    - binary_sensor.entrance_motion_occupancy
+  safe_mode: input_boolean.safe_mode
+  safe_mode_delay: 10
+  activation_delay: 10
+  stop_delay: 60
+  alerts:
+    - id: media_player
+      sound: amzn_sfx_scifi_alarm_04
+      loop_delay: 4
+      volume: 1
+      media_players: 
+        - media_player.alexa
+        - media_player.alexa_2
+    - id: notifier
+      notifiers:
+        - notify.mobile_app
+        - notify.notifier
+      title: "Alert! [{sensor}]"
+      message: "Alarm has been triggered from: {sensor}"
+    - id: xiaomi_gateway
+      gw_mac:
+        - 00AA0AA0A0AA
+      ringtone_id: 2
+      ringtone_vol: 100
+    - id: light
+      lights:
+        - light.gateway_light
+        - light.livingroom_light

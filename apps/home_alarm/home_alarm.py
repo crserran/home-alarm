@@ -23,7 +23,7 @@ class HomeAlarm(hass.Hass):
     alert_list = self.parse_alerts(alert_configs)
     self.alerts = AlertList(alert_list)
     # Safe Mode initialization
-    self.safe_mode_active = True if (await self.get_state(self.safe_mode) == Generic.ON) else False
+    self.safe_mode_active = await self.get_state(self.safe_mode) == Generic.ON
     # Sensor that fires alarm
     self.sensor_fired = None
     # Handler functions
