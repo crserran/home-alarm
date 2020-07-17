@@ -43,7 +43,6 @@ stages:
             codeCoverageTool: Cobertura
             summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
 
-stages:
   - stage: Deploy
     displayName: Deploy Stage
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
