@@ -52,9 +52,23 @@ stages:
     displayName: Deploy Stage
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
     jobs:
-      - job: Build
-        displayName: Build job
+      - job: Deploy
+        displayName: Deploy job
 
         steps:
+        - task: ArchiveFiles@2
+          displayName: Zipping apps/home_alarm folder
+          inputs:
+            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/apps/home_alarm' 
+            includeRootFolder: false 
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/home_alarm.zip'
+        - task: GithubRelease@0
+          displayName: Create GitHub Release
+          inputs:
+            gitHubConnection: github.com_crserran
+            repositoryName: crserran/home_alarm
+            isPreRelease: ${{ contains(variables['Build.SourceBranchName'], 'b') }}
+            assets: '$(Build.ArtifactStagingDirectory)/home_alarm.zip'
         - script: pipenv run mkdocs gh-deploy
           displayName: Deploy docs
