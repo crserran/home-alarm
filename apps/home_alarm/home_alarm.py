@@ -4,11 +4,15 @@ from ha_core.state import State
 from ha_core.alert import Alert, AlertList
 from ha_alert import get_alerts
 from ha_utils.ha_const import Generic
+import ha_version
 
 
 class HomeAlarm(hass.Hass):
     async def initialize(self) -> None:
-        self.log("Welcome to Home Alarm security system.")
+        self.log(
+            f"🚨Welcome to Home Alarm security system {ha_version.__version__}",
+            ascii_encode=False,
+        )
 
         # Home Alarm config parameters
         self.sensors = self.args["sensors"]

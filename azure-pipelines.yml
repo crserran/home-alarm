@@ -10,14 +10,21 @@ pr:
 pool:
   vmImage: 'ubuntu-latest'
   
+strategy:
+  matrix:
+    Python36:
+      python.version: '3.6'
+    Python37:
+      python.version: '3.7'
+      
 steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '3.7' 
-  displayName: 'Install Python 3.7'
+    versionSpec: '$(python.version)' 
+  displayName: 'Install Python $(python.version)'
 - script: pip install pipenv
   displayName: 'Install pipenv'
-- script: python -m pipenv install --dev
+- script: pipenv install --dev
   displayName: 'Install dependencies'
 - script: pipenv run black apps/home_alarm tests --check
   displayName: Formatter (black)
