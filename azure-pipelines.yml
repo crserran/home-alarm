@@ -9,32 +9,48 @@ pr:
   
 pool:
   vmImage: 'ubuntu-latest'
-  
-strategy:
-  matrix:
-    Python36:
-      python.version: '3.6'
-    Python37:
-      python.version: '3.7'
-      
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)' 
-  displayName: 'Install Python $(python.version)'
-- script: pip install pipenv
-  displayName: 'Install pipenv'
-- script: pipenv install --dev
-  displayName: 'Install dependencies'
-- script: pipenv run black apps/home_alarm tests --check
-  displayName: Formatter (black)
-- script: pipenv run pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=apps --cov-report=xml --cov-report=html
-  displayName: 'Tests (pytest)'
-- task: PublishCodeCoverageResults@1
-  displayName: Publish code coverage
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
-- script: pipenv run mkdocs gh-deploy
-  condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
-  displayName: Deploy docs
+
+stages:
+  - stage: Test
+    displayName: Test Stage
+    jobs: 
+      - job: Test
+        displayName: Test job
+
+        strategy:
+          matrix:
+            Python36:
+              python.version: '3.6'
+            Python37:
+              python.version: '3.7'
+              
+        steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '$(python.version)' 
+          displayName: 'Install Python $(python.version)'
+        - script: pip install pipenv
+          displayName: 'Install pipenv'
+        - script: pipenv install --dev
+          displayName: 'Install dependencies'
+        - script: pipenv run black apps/home_alarm tests --check
+          displayName: Formatter (black)
+        - script: pipenv run pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=apps --cov-report=xml --cov-report=html
+          displayName: 'Tests (pytest)'
+        - task: PublishCodeCoverageResults@1
+          displayName: Publish code coverage
+          inputs:
+            codeCoverageTool: Cobertura
+            summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+
+stages:
+  - stage: Deploy
+    displayName: Deploy Stage
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+    jobs:
+      - job: Build
+        displayName: Build job
+
+        steps:
+        - script: pipenv run mkdocs gh-deploy
+          displayName: Deploy docs
