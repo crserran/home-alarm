@@ -38,7 +38,7 @@ stages:
         - script: pipenv run pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=apps --cov-report=xml --cov-report=html
           displayName: 'Tests (pytest)'
 
-      - job: Publish Test Report
+      - job: Publish_Test_Report
         displayName: Publish Test Report
         steps:
         - task: PublishCodeCoverageResults@1
