@@ -11,11 +11,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-  - stage: Test
-    displayName: Test Stage
+  - stage: Build
+    displayName: Build Stage
     jobs: 
-      - job: Test
-        displayName: Test job
+      - job: Build
+        displayName: Build job
 
         strategy:
           matrix:
@@ -37,6 +37,10 @@ stages:
           displayName: Formatter (black)
         - script: pipenv run pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=apps --cov-report=xml --cov-report=html
           displayName: 'Tests (pytest)'
+
+      - job: Publish Test Report
+        displayName: Publish Test Report
+        steps:
         - task: PublishCodeCoverageResults@1
           displayName: Publish code coverage
           inputs:
