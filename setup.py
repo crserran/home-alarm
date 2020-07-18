@@ -5,5 +5,5 @@ setup(
     python_requires=">=3.6",
     package_dir={"": "apps/home_alarm"},
     packages=find_packages(where="apps/home_alarm"),
-    # py_modules=["utils", "home_alarm", "version", "const"],
+    py_modules=["home_alarm", "ha_version"],
 )

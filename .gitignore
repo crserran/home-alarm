@@ -138,3 +138,6 @@ dmypy.json
 cython_debug/
 
 .DS_Store
+.vscode
+junit
+Pipfile.lock

@@ -10,7 +10,10 @@ pre-commit = "*"
 commitizen = "*"
 flake8 = "*"
 mkdocs-material = "*"
-
+pytest = "*"
+pytest-cov = "*"
+pytest-mock= "*"
+pytest-asyncio = "*"
 
 [packages]
 appdaemon = "==4.0.3"

@@ -1,0 +1,69 @@
+trigger:
+  - master
+  - dev
+  - refs/tags/*
+  
+pr:
+  - master
+  - dev
+  
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: Build
+    displayName: Build Stage
+    jobs: 
+      - job: Build
+        displayName: Build job
+
+        strategy:
+          matrix:
+            Python36:
+              python.version: '3.6'
+            Python37:
+              python.version: '3.7'
+              
+        steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '$(python.version)' 
+          displayName: 'Install Python $(python.version)'
+        - script: pip install pipenv
+          displayName: 'Install pipenv'
+        - script: pipenv install --dev
+          displayName: 'Install dependencies'
+        - script: pipenv run black apps/home_alarm tests --check
+          displayName: Formatter (black)
+        - script: pipenv run pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=apps --cov-report=xml --cov-report=html
+          displayName: 'Tests (pytest)'
+        - task: PublishCodeCoverageResults@1
+          displayName: Publish code coverage
+          inputs:
+            codeCoverageTool: Cobertura
+            summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+        - script: pipenv run mkdocs gh-deploy
+          displayName: Deploy docs
+          condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+
+  - stage: Deploy
+    displayName: Deploy Stage
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+    jobs:
+      - job: Deploy
+        displayName: Deploy job
+        steps:
+        - task: ArchiveFiles@2
+          displayName: Zipping apps/home_alarm folder
+          inputs:
+            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/apps/home_alarm' 
+            includeRootFolder: false 
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/home_alarm.zip'
+        - task: GithubRelease@0
+          displayName: Create GitHub Release
+          inputs:
+            gitHubConnection: github.com_crserran
+            repositoryName: crserran/home-alarm
+            isPreRelease: ${{ contains(variables['Build.SourceBranchName'], 'b') }}
+            assets: '$(Build.ArtifactStagingDirectory)/home_alarm.zip'
