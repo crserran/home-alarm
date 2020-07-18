@@ -42,9 +42,9 @@ stages:
           inputs:
             codeCoverageTool: Cobertura
             summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
-        - script: pipenv run mkdocs gh-deploy
-          displayName: Deploy docs
-          condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+        # - script: pipenv run mkdocs gh-deploy
+        #   displayName: Deploy docs
+        #   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
 
   - stage: Deploy
     displayName: Deploy Stage
