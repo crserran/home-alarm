@@ -15,7 +15,7 @@
     
     
       
-        <title>Media Player - Home Alarm</title>
+        <title>Light - Home Alarm</title>
       
     
     
@@ -49,7 +49,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#media-player-alert" class="md-skip">
+        <a href="#light-alert" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +77,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Media Player
+              Light
             
           </span>
         </div>
@@ -278,6 +278,30 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../media_player/" title="Media Player" class="md-nav__link">
+      Media Player
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../notifier/" title="Notifier" class="md-nav__link">
+      Notifier
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -289,14 +313,14 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Media Player
+        Light
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
         </span>
       </label>
     
-    <a href="./" title="Media Player" class="md-nav__link md-nav__link--active">
-      Media Player
+    <a href="./" title="Light" class="md-nav__link md-nav__link--active">
+      Light
     </a>
     
       
@@ -321,34 +345,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../notifier/" title="Notifier" class="md-nav__link">
-      Notifier
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../light/" title="Light" class="md-nav__link">
-      Light
-    </a>
   </li>
 
         
@@ -413,6 +420,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -429,7 +443,7 @@
                   
                 
                 
-                <h1 id="media-player-alert">Media Player Alert</h1>
+                <h1 id="light-alert">Light Alert</h1>
 <h2 id="attributes">Attributes</h2>
 <table>
 <thead>
@@ -447,38 +461,24 @@
 <td align="center">string</td>
 <td align="center">yes</td>
 <td align="center"></td>
-<td align="center">Media Player Alert identifier, value should be <code>media_player</code></td>
+<td align="center">Light Alert identifier, value should be <code>light</code></td>
 </tr>
 <tr>
-<td align="center">media_players</td>
+<td align="center">lights</td>
 <td align="center">array</td>
 <td align="center">yes</td>
 <td align="center">[]</td>
-<td align="center">Media player devices to reproduce the alarm sound.</td>
-</tr>
-<tr>
-<td align="center">sound</td>
-<td align="center">string</td>
-<td align="center">yes</td>
-<td align="center"></td>
-<td align="center">If Alexa get the name of sound from <a href="https://developer.amazon.com/es-ES/docs/alexa/custom-skills/ask-soundlibrary.html#available-sounds">here</a>, otherwise other media players specify the full path of the mp3 track.</td>
-</tr>
-<tr>
-<td align="center">loop_delay</td>
-<td align="center">int</td>
-<td align="center">no</td>
-<td align="center">None</td>
-<td align="center">Time to reproduce again <code>sound</code> attribute. If <code>sound</code> duration is 4secs, <code>loop_delay</code> has to be 4.</td>
-</tr>
-<tr>
-<td align="center">volume</td>
-<td align="center">float</td>
-<td align="center">no</td>
-<td align="center">1</td>
-<td align="center">Volume to reproduce the alarm sound. From 0 to 1.</td>
+<td align="center">List of lights.</td>
 </tr>
 </tbody>
 </table>
+<h2 id="example">Example</h2>
+<div class="codehilite"><pre><span></span><code><span class="nt">alerts</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">light</span>
+    <span class="nt">lights</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">light.livingroom</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">light.bedroom</span>
+</code></pre></div>
                 
               
               
@@ -497,7 +497,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../config/others/" title="Google Home & Others" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../notifier/" title="Notifier" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -506,19 +506,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Google Home & Others
+                Notifier
               </div>
             </div>
           </a>
         
         
-          <a href="../notifier/" title="Notifier" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../xiaomi_gateway/" title="Xiaomi Gateway" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Notifier
+                Xiaomi Gateway
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
