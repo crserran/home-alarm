@@ -10,7 +10,7 @@ import ha_version
 class HomeAlarm(hass.Hass):
     async def initialize(self) -> None:
         self.log(
-            f"🚨Welcome to Home Alarm security system {ha_version.__version__}",
+            f"🚨 Home Alarm security system {ha_version.__version__}",
             ascii_encode=False,
         )
 
