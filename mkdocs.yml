@@ -12,6 +12,8 @@ nav:
   - Alerts:
     - Media Player: alerts/media_player.md
     - Notifier: alerts/notifier.md
+    - Light: alerts/light.md
+    - Xiaomi Gateway: alerts/xiaomi_gateway.md
   - Identification: identification.md
 
 markdown_extensions:
