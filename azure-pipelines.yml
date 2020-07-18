@@ -37,11 +37,6 @@ stages:
           displayName: Formatter (black)
         - script: pipenv run pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=apps --cov-report=xml --cov-report=html
           displayName: 'Tests (pytest)'
-
-      - job: Publish_Test_Report
-        displayName: Publish Test Report
-        dependsOn: Build
-        steps:
         - task: PublishCodeCoverageResults@1
           displayName: Publish code coverage
           inputs:
@@ -67,7 +62,7 @@ stages:
           displayName: Create GitHub Release
           inputs:
             gitHubConnection: github.com_crserran
-            repositoryName: crserran/home_alarm
+            repositoryName: crserran/home-alarm
             isPreRelease: ${{ contains(variables['Build.SourceBranchName'], 'b') }}
             assets: '$(Build.ArtifactStagingDirectory)/home_alarm.zip'
         - script: pipenv run mkdocs gh-deploy
