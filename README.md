@@ -1,6 +1,7 @@
 # HOME ALARM
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/crserran/home-alarm?style=for-the-badge)
+[![downloads-latest](https://img.shields.io/github/downloads/crserran/home-alarm/latest/total?style=for-the-badge)](http://github.com/crserran/home-alarm/releases/latest)
 ![GitHub Release Date](https://img.shields.io/github/release-date/crserran/home-alarm?style=for-the-badge)
 [![azure-pipelines-build](https://img.shields.io/azure-devops/build/criserrano93/Home%20Alarm/1/master.svg?style=for-the-badge)](https://dev.azure.com/criserrano93/Home%20Alarm/_build/latest?definitionId=1&branchName=master)
 
