@@ -15,7 +15,7 @@
     
     
       
-        <title>Google Home & Others - Home Alarm</title>
+        <title>Switch - Home Alarm</title>
       
     
     
@@ -47,6 +47,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#switch-alert" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -71,7 +76,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Google Home & Others
+              Switch
             
           </span>
         </div>
@@ -179,12 +184,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       Configuration
@@ -208,7 +211,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../" title="Main Configuration" class="md-nav__link">
+    <a href="../../config/" title="Main Configuration" class="md-nav__link">
       Main Configuration
     </a>
   </li>
@@ -220,7 +223,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../alexa/" title="Alexa" class="md-nav__link">
+    <a href="../../config/alexa/" title="Alexa" class="md-nav__link">
       Alexa
     </a>
   </li>
@@ -230,18 +233,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" title="Google Home & Others" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../config/others/" title="Google Home & Others" class="md-nav__link">
       Google Home & Others
     </a>
-    
   </li>
 
         
@@ -254,10 +250,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       Alerts
@@ -281,7 +279,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../alerts/media_player/" title="Media Player" class="md-nav__link">
+    <a href="../media_player/" title="Media Player" class="md-nav__link">
       Media Player
     </a>
   </li>
@@ -293,7 +291,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../alerts/notifier/" title="Notifier" class="md-nav__link">
+    <a href="../notifier/" title="Notifier" class="md-nav__link">
       Notifier
     </a>
   </li>
@@ -305,7 +303,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../alerts/light/" title="Light" class="md-nav__link">
+    <a href="../light/" title="Light" class="md-nav__link">
       Light
     </a>
   </li>
@@ -317,7 +315,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../alerts/xiaomi_gateway/" title="Xiaomi Gateway" class="md-nav__link">
+    <a href="../xiaomi_gateway/" title="Xiaomi Gateway" class="md-nav__link">
       Xiaomi Gateway
     </a>
   </li>
@@ -327,11 +325,60 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../alerts/switch/" title="Switch" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Switch
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Switch" class="md-nav__link md-nav__link--active">
       Switch
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -359,6 +406,45 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -368,12 +454,42 @@
                   
                 
                 
-                  <h1>Google Home & Others</h1>
-                
-                <p>Google Home and others media players have the ability to play mp3 tracks from internet or locally. That's because you have to adapt the <code>apps.yaml</code> configuration to make that working properly.</p>
-<p>I recommend to follow the next steps in order to have app well configured.</p>
-<p>Find a track with <code>mp3</code> extension from the internet or use one localy. Copy &amp; paste the url to the <code>sound</code> attribute.</p>
-<p>Figure out at the track duration and fit the <code>loop_delay</code> attribute with the track duration. You can skip this step if your track is greater than <code>stop_delay</code>.</p>
+                <h1 id="switch-alert">Switch Alert</h1>
+<h2 id="attributes">Attributes</h2>
+<table>
+<thead>
+<tr>
+<th align="center">Name</th>
+<th align="center">Type</th>
+<th align="center">Required</th>
+<th align="center">Default</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">id</td>
+<td align="center">string</td>
+<td align="center">yes</td>
+<td align="center"></td>
+<td align="center">Switch Alert identifier, value should be <code>switch</code></td>
+</tr>
+<tr>
+<td align="center">switches</td>
+<td align="center">array</td>
+<td align="center">yes</td>
+<td align="center">[]</td>
+<td align="center">List of switches.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<div class="codehilite"><pre><span></span><code><span class="nt">alerts</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">switch</span>
+    <span class="nt">lights</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">switch.bedroom</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">switch.livingroom</span>
+</code></pre></div>
                 
               
               
@@ -392,7 +508,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../alexa/" title="Alexa" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../xiaomi_gateway/" title="Xiaomi Gateway" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -401,19 +517,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Alexa
+                Xiaomi Gateway
               </div>
             </div>
           </a>
         
         
-          <a href="../../alerts/media_player/" title="Media Player" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../identification/" title="Identification" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Media Player
+                Identification
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
