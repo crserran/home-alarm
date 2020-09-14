@@ -59,6 +59,6 @@ For run successfully this application you have to take into account the followin
 
 # Questions
 
-If you have any question, you can either [open an issue](https://github.com/crserran/home-alarm/issues/new) or comment in [this topic](https://community.home-assistant.io/t/home-alarm-build-your-own-security-system-at-home/203784) from the Home Assistant community forum.
+If you have any question, you can either [open an issue](https://github.com/crserran/home-alarm/issues/new/choose) or comment in [this topic](https://community.home-assistant.io/t/home-alarm-build-your-own-security-system-at-home/203784) from the Home Assistant community forum.
 
 If you like this project, don't forget to star it :)
