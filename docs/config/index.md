@@ -16,7 +16,7 @@ home_alarm:
     - id: media_player
       sound: amzn_sfx_scifi_alarm_04
       loop_delay: 4
-      media_players: 
+      media_players:
         - media_player.alexa
         - media_player.alexa2
     - id: notifier
@@ -26,6 +26,7 @@ home_alarm:
 ```
 
 ## Advanced
+
 Example of an advanced configuration. I recommend to take a look `Attributes` section.
 
 ```yaml
@@ -45,7 +46,7 @@ home_alarm:
       sound: amzn_sfx_scifi_alarm_04
       loop_delay: 4
       volume: 0.8
-      media_players: 
+      media_players:
         - media_player.alexa
         - media_player.alexa2
     - id: notifier
@@ -57,21 +58,25 @@ home_alarm:
 ```
 
 !!! info "IMPORTANT NOTE"
-    `sound` and `loop_delay` are linked variables. If the track specified at `sound` is too short, you will want to repeat it continuously specifying the attribute `loop_delay` as the same as the `sound` track duration.
+`sound` and `loop_delay` are linked variables. If the track specified at `sound` is too short, you will want to repeat it continuously specifying the attribute `loop_delay` as the same as the `sound` track duration.
 
 ## Attributes
+
 ### Generic
- Name | Type | Required | Default | Description
-:----:|:----:|:--------:|:-------:|:-----------:
-sensors | array | yes | [] | Windows and doors binary sensors.
-safe_mode | string | yes |  | Safe mode input boolean. If `true` protected mode enabled, otherwise `false` protected mode disabled.
-safe_mode_delay | int | no | 60 | Time the user has to leave the house after safe_mode sensor is changed to `ON` state.
-activation_delay | int | no | 15 | Time that user has to be identified in the system. If user is not identified, alarm will be fired.
-stop_delay | int | no | 180 | Time to stop alarm after been fired.
-alerts | array | yes | [] | List of alerts (view supported alerts on the alerts section)
+
+|       Name       |  Type  | Required | Default |                                              Description                                              |
+| :--------------: | :----: | :------: | :-----: | :---------------------------------------------------------------------------------------------------: |
+|     sensors      | array  |   yes    |   []    |                                   Windows and doors binary sensors.                                   |
+|    safe_mode     | string |   yes    |         | Safe mode input boolean. If `true` protected mode enabled, otherwise `false` protected mode disabled. |
+| safe_mode_delay  |  int   |    no    |   60    |         Time the user has to leave the house after safe_mode sensor is changed to `ON` state.         |
+| activation_delay |  int   |    no    |   15    |  Time that user has to be identified in the system. If user is not identified, alarm will be fired.   |
+|    stop_delay    |  int   |    no    |   180   |                                 Time to stop alarm after been fired.                                  |
+|      alerts      | array  |   yes    |   []    |                     List of alerts (view supported alerts on the alerts section)                      |
 
 ### Alerts
 
- * [Media Player Alerts](../alerts/media_player.md)
- * [Notifier Alerts](../alerts/notifier.md)
-
+- [Media Player Alerts](../alerts/media_player.md)
+- [Notifier Alerts](../alerts/notifier.md)
+- [Xiaomi Gateway Alerts](../alerts/xiaomi_gateway.md)
+- [Light Alerts](../alerts/light.md)
+- [Switch Alerts](../alerts/switch.md)

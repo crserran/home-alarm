@@ -10,7 +10,7 @@
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
 [![buy-me-a-beer](https://img.shields.io/badge/sponsor-Buy%20me%20a%20beer-orange?style=for-the-badge)](https://www.buymeacoffee.com/crserran)
 
-_Home Alarm_ allows you to use any media player such as Alexa or Google Home to make them act as an alarm system at home. It also supports the notification system to alert you if you are not at home.
+_Home Alarm_ allows you to use any media player such as Alexa or Google Home to make them act as an alarm system at home. It supports the notification system to alert you if you are not at home and other alerts like blink ligths or toggle switches.
 
 # Documentation
 
@@ -56,3 +56,9 @@ For run successfully this application you have to take into account the followin
 - Safe Mode as an input_boolean configured in HA
 - Have a media player configured in HA
 - At least one notifier
+
+# Questions
+
+If you have any question, you can either [open an issue](https://github.com/crserran/home-alarm/issues/new) or comment in [this topic](https://community.home-assistant.io/t/home-alarm-build-your-own-security-system-at-home/203784) from the Home Assistant community forum.
+
+If you like this project, don't forget to star it :)

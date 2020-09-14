@@ -14,7 +14,7 @@ home_alarm:
       sound: amzn_sfx_scifi_alarm_04
       loop_delay: 4
       volume: 1
-      media_players: 
+      media_players:
         - media_player.alexa
         - media_player.alexa_2
     - id: notifier
@@ -32,3 +32,6 @@ home_alarm:
       lights:
         - light.gateway_light
         - light.livingroom_light
+    - id: switch
+      switches:
+        - switch.bedroom_switch

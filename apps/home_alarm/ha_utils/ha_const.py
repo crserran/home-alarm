@@ -33,3 +33,8 @@ class Light:
     TURN_OFF = "light/turn_off"
     COLOR = [255, 0, 0]
     BRIGHTNESS = 255
+
+
+class Switch:
+    TURN_ON = "switch/turn_on"
+    TURN_OFF = "switch/turn_off"
