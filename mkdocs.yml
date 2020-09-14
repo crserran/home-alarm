@@ -6,14 +6,15 @@ nav:
   - Requirements: requirements.md
   - Installation: installation.md
   - Configuration:
-    - Main Configuration: config/index.md
-    - Alexa: config/alexa.md
-    - Google Home & Others: config/others.md
+      - Main Configuration: config/index.md
+      - Alexa: config/alexa.md
+      - Google Home & Others: config/others.md
   - Alerts:
-    - Media Player: alerts/media_player.md
-    - Notifier: alerts/notifier.md
-    - Light: alerts/light.md
-    - Xiaomi Gateway: alerts/xiaomi_gateway.md
+      - Media Player: alerts/media_player.md
+      - Notifier: alerts/notifier.md
+      - Light: alerts/light.md
+      - Xiaomi Gateway: alerts/xiaomi_gateway.md
+      - Switch: alerts/switch.md
   - Identification: identification.md
 
 markdown_extensions:

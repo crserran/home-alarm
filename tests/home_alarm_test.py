@@ -78,7 +78,13 @@ async def test_door_opened(
 
 
 def test_parse_alerts(sut):
-    expected_alert_ids = ["media_player", "notifier", "xiaomi_gateway", "light"]
+    expected_alert_ids = [
+        "media_player",
+        "notifier",
+        "xiaomi_gateway",
+        "light",
+        "switch",
+    ]
 
     sut.state = State()
     config = read_config("test_config_with_all_alerts")
