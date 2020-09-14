@@ -17,4 +17,4 @@ class SwitchAlert(Alert):
     async def alarm_stopped(self) -> None:
         self.hass.log("Stopping switches...")
         for switch in self.switches:
-            await self.hass.call_service(Switch.TURN_OFF, entity_id=light)
+            await self.hass.call_service(Switch.TURN_OFF, entity_id=switch)
