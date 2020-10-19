@@ -1,0 +1,12 @@
+- id: '1590773979396'
+  alias: RFID Identification
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ is_state("sensor.rfid_real_time", "YOUR_RFID_TAG_ID") or is_state("sensor.rfid_real_time",
+      "OTHER_RFID_TAG_ID") }}'
+  condition: []
+  action:
+  - data: {}
+    entity_id: input_boolean.safe_mode
+    service: input_boolean.toggle

@@ -25,3 +25,4 @@ markdown_extensions:
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
   - pymdownx.tasklist:
       custom_checkbox: true
+  - attr_list
