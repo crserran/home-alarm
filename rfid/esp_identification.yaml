@@ -1,0 +1,40 @@
+esphome:
+  name: esp_identification
+  platform: ESP32
+  board: esp-wrover-kit
+  includes:
+    - libs/esp32/rc522_sensor.h  
+  libraries:
+    - "MFRC522"
+    - "SPI"
+
+wifi:
+  ssid: "YOUR_WIFI_SSID"
+  password: !secret wifi_password
+
+mqtt:
+  broker: "YOUR_BROKER_IP"
+  username: "mqtt"
+  password: !secret mqtt_password
+  port: "1883"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+text_sensor:
+  - platform: custom
+    lambda: |-
+      auto my_sensor = new RFIDRC522Sensor();
+      App.register_component(my_sensor);
+      return {my_sensor->rfid, my_sensor->rfidlast};
+    
+    text_sensors:
+     - name: "RFID (real time)"
+     - name: "RFID (last read)"
