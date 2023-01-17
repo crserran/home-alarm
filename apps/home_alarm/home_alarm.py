@@ -33,6 +33,7 @@ class HomeAlarm(hass.Hass):
         # Sensor that fires alarm
         self.sensor_fired = None
         # Handler functions
+        self.handle_countdown_fired = None
         self.handle_stop_alarm = None
         self.handle_activate_safe_mode = None
 
@@ -63,7 +64,9 @@ class HomeAlarm(hass.Hass):
             and self.safe_mode_active
         ):
             self.state.set_ready_to_fire()
-            self.run_in(self.countdown, self.activation_delay)
+            self.handle_countdown_fired = await self.run_in(
+                self.countdown, self.activation_delay
+            )
 
     async def countdown(self, kwargs):
         safe_mode_state = await self.get_state(self.safe_mode)
@@ -86,6 +89,8 @@ class HomeAlarm(hass.Hass):
             await self.stop_alarm()
 
         self.safe_mode_active = False
+
+        await self.cancel_timer(self.handle_countdown_fired)
         await self.cancel_timer(self.handle_activate_safe_mode)
 
     async def reset_stop_alarm(self):
