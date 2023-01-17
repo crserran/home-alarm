@@ -52,16 +52,13 @@ class HomeAlarm(hass.Hass):
     async def door_opened_cb(self, sensor, attribute, old, new, kwargs):
         self.sensor_fired = sensor
         sensor_fired_name = await self.friendly_name(self.sensor_fired)
-        safe_mode_state = await self.get_state(self.safe_mode)
         self.log(f"{sensor_fired_name} activated")
-        self.log(f"`safe_mode` state: {safe_mode_state}")
         self.log(f"`safe_mode_active` state: {self.safe_mode_active}")
         await self.reset_stop_alarm()
         if (
-            safe_mode_state == Generic.ON
+            self.safe_mode_active
             and not self.state.ready_to_fire
             and not self.state.fired
-            and self.safe_mode_active
         ):
             self.state.set_ready_to_fire()
             self.handle_countdown_fired = await self.run_in(
@@ -69,8 +66,7 @@ class HomeAlarm(hass.Hass):
             )
 
     async def countdown(self, kwargs):
-        safe_mode_state = await self.get_state(self.safe_mode)
-        if safe_mode_state == Generic.ON:
+        if self.safe_mode_active:
             self.log("The alarm has been triggered")
             self.state.set_fired()
             # Alarm fired action
