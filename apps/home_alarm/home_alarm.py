@@ -74,6 +74,10 @@ class HomeAlarm(hass.Hass):
             # Alarm stop action after stop_delay
             self.handle_stop_alarm = await self.run_in(self.stop_alarm, self.stop_delay)
 
+    async def cancel_timer(self, handle):
+        if handle is not None and await self.timer_running(handle):
+            await super().cancel_timer(handle)
+
     async def stop_alarm(self, kwargs=None):
         self.state.set_stopped()
         self.alerts.alarm_stopped()
