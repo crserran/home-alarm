@@ -16,4 +16,4 @@ pytest-asyncio = "*"
 black = "==22.12.0"
 
 [packages]
-appdaemon = "==4.0.3"
+appdaemon = "==4.2.1"

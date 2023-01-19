@@ -33,6 +33,7 @@ class HomeAlarm(hass.Hass):
         # Sensor that fires alarm
         self.sensor_fired = None
         # Handler functions
+        self.handle_countdown_fired = None
         self.handle_stop_alarm = None
         self.handle_activate_safe_mode = None
 
@@ -51,29 +52,31 @@ class HomeAlarm(hass.Hass):
     async def door_opened_cb(self, sensor, attribute, old, new, kwargs):
         self.sensor_fired = sensor
         sensor_fired_name = await self.friendly_name(self.sensor_fired)
-        safe_mode_state = await self.get_state(self.safe_mode)
         self.log(f"{sensor_fired_name} activated")
-        self.log(f"`safe_mode` state: {safe_mode_state}")
         self.log(f"`safe_mode_active` state: {self.safe_mode_active}")
         await self.reset_stop_alarm()
         if (
-            safe_mode_state == Generic.ON
+            self.safe_mode_active
             and not self.state.ready_to_fire
             and not self.state.fired
-            and self.safe_mode_active
         ):
             self.state.set_ready_to_fire()
-            self.run_in(self.countdown, self.activation_delay)
+            self.handle_countdown_fired = await self.run_in(
+                self.countdown, self.activation_delay
+            )
 
     async def countdown(self, kwargs):
-        safe_mode_state = await self.get_state(self.safe_mode)
-        if safe_mode_state == Generic.ON:
+        if self.safe_mode_active:
             self.log("The alarm has been triggered")
             self.state.set_fired()
             # Alarm fired action
             self.alerts.alarm_fired(self.sensor_fired)
             # Alarm stop action after stop_delay
             self.handle_stop_alarm = await self.run_in(self.stop_alarm, self.stop_delay)
+
+    async def cancel_timer(self, handle):
+        if handle is not None and await self.timer_running(handle):
+            await super().cancel_timer(handle)
 
     async def stop_alarm(self, kwargs=None):
         self.state.set_stopped()
@@ -86,6 +89,8 @@ class HomeAlarm(hass.Hass):
             await self.stop_alarm()
 
         self.safe_mode_active = False
+
+        await self.cancel_timer(self.handle_countdown_fired)
         await self.cancel_timer(self.handle_activate_safe_mode)
 
     async def reset_stop_alarm(self):
