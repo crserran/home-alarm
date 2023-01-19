@@ -5,7 +5,6 @@ verify_ssl = true
 
 [dev-packages]
 home_alarm = {path = ".", editable = true}
-black = "==19.10b0"
 pre-commit = "*"
 commitizen = "*"
 flake8 = "*"
@@ -14,6 +13,7 @@ pytest = "*"
 pytest-cov = "*"
 pytest-mock= "*"
 pytest-asyncio = "*"
+black = "==22.12.0"
 
 [packages]
 appdaemon = "==4.0.3"
