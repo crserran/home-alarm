@@ -87,6 +87,9 @@ class HomeAlarm(hass.Hass):
         if self.state.fired:
             self.log("Alarm has been disarmed")
             await self.stop_alarm()
+        else:
+            self.log("Safe mode deactivated")
+            self.state.set_stopped()
 
         self.safe_mode_active = False
 
