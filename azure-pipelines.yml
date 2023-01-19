@@ -19,8 +19,6 @@ stages:
 
         strategy:
           matrix:
-            Python37:
-              python.version: '3.7.15'
             Python38:
               python.version: '3.8.15'
             Python39:
