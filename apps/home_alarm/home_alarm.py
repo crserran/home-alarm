@@ -39,7 +39,7 @@ class HomeAlarm(hass.Hass):
 
         self.listen_state(self.safe_mode_cb, self.safe_mode)
         for sensor in self.sensors:
-            self.listen_state(self.door_opened_cb, sensor, new=Generic.ON)
+            self.listen_state(self.door_opened_cb, sensor, new=Generic.ON, old=Generic.OFF)
 
     async def safe_mode_cb(self, sensor, attribute, old, new, kwargs):
         if new == Generic.ON:
