@@ -25,7 +25,10 @@ async def test_initialize(sut, monkeypatch, mocker):
     assert listen_state_stub.call_count == 4
     listen_state_stub.assert_any_call(sut.safe_mode_cb, "input_boolean.safe_mode")
     listen_state_stub.assert_any_call(
-        sut.door_opened_cb, "binary_sensor.livingroom_window_contact", new=Generic.ON
+        sut.door_opened_cb,
+        "binary_sensor.livingroom_window_contact",
+        new=Generic.ON,
+        old=Generic.OFF,
     )
 
 
