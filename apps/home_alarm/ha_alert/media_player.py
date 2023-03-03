@@ -10,6 +10,9 @@ class MediaPlayerAlert(Alert):
         self.media_players = kwargs["media_players"]
         self.sound = kwargs["sound"]
         self.volume = kwargs.get("volume", MediaPlayer.VOLUME)
+        self.default_init_volume = kwargs.get(
+            "default_init_volume", MediaPlayer.DEFAULT_INIT_VOLUME
+        )
         self.loop_delay = kwargs.get("loop_delay", None)
         # Initial state of media players
         self.init_state = dict()
@@ -42,8 +45,9 @@ class MediaPlayerAlert(Alert):
     async def get_init_state(self) -> dict:
         state = dict()
         for media_player in self.media_players:
-            state[media_player] = await self.hass.get_state(
-                media_player, MediaPlayer.VOLUME_LEVEL
+            volume = await self.hass.get_state(media_player, MediaPlayer.VOLUME_LEVEL)
+            state[media_player] = (
+                volume if volume is not None else self.default_init_volume
             )
         return state
 

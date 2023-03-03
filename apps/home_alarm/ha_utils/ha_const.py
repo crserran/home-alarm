@@ -12,6 +12,7 @@ class MediaPlayer:
     SET_VOL = "media_player/volume_set"
     CTYPE = "sound"
     VOLUME = 1
+    DEFAULT_INIT_VOLUME = 0.5
     VOLUME_LEVEL = "volume_level"
 
 
