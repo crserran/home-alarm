@@ -20,11 +20,11 @@ stages:
         strategy:
           matrix:
             Python38:
-              python.version: '3.8.15'
+              python.version: '3.8'
             Python39:
-              python.version: '3.9.16'
+              python.version: '3.9'
             Python310:
-              python.version: '3.10.9'
+              python.version: '3.10'
               
         steps:
         - task: UsePythonVersion@0
@@ -39,10 +39,9 @@ stages:
           displayName: Formatter (black)
         - script: pipenv run pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=apps --cov-report=xml --cov-report=html
           displayName: 'Tests (pytest)'
-        - task: PublishCodeCoverageResults@1
+        - task: PublishCodeCoverageResults@2
           displayName: Publish code coverage
           inputs:
-            codeCoverageTool: Cobertura
             summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
         # - script: pipenv run mkdocs gh-deploy
         #   displayName: Deploy docs
